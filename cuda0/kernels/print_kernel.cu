@@ -10,16 +10,23 @@
  */
 
 
-// System includes
-#include <stdio.h>
-#include <assert.h>
+//// System includes
+//#include <stdio.h>
+//#include <assert.h>
 
+//// CUDA runtime
+//#include <cuda_runtime.h>
+
+//// helper functions and utilities to work with CUDA
+//#include <helper_functions.h>
+//#include <helper_cuda.h>
 // CUDA runtime
 #include <cuda_runtime.h>
 
 // helper functions and utilities to work with CUDA
 #include <helper_functions.h>
 #include <helper_cuda.h>
+#include "../include/cuda_fd_funcs.h"
 
 #ifndef MAX
 #define MAX(a,b) (a > b ? a : b)
@@ -32,8 +39,7 @@ __global__ void testKernel(int val)
             threadIdx.z*blockDim.x*blockDim.y+threadIdx.y*blockDim.x+threadIdx.x,\
             val);
 }
-
-int main(int argc, char **argv)
+void doCudaKernel(int argc, char **argv)
 {
     int devID;
     cudaDeviceProp props;
@@ -56,5 +62,4 @@ int main(int argc, char **argv)
     testKernel<<<dimGrid, dimBlock>>>(10);
     cudaDeviceSynchronize();
 
-    return EXIT_SUCCESS;
 }
