@@ -26,25 +26,28 @@ void doVectorAddition(int* a ,int* b,int* c,int N)
       double duration;
       start = std::clock();
 
-      int *dev_a;
-      int *dev_b;
-      int *dev_c;
+//      int *dev_a;
+//      int *dev_b;
+//      int *dev_c;
 
       // allocate memory on GPU
-      cudaMalloc((void**)&dev_a, N * sizeof(int));
-      cudaMalloc((void**)&dev_b, N * sizeof(int));
-      cudaMalloc((void**)&dev_c, N * sizeof(int));
+      CudaSmartPtr<int> dev_a(N);
+      CudaSmartPtr<int> dev_b(N);
+      CudaSmartPtr<int> dev_c(N);
+//      cudaMalloc((void**)&dev_a, N * sizeof(int));
+//      cudaMalloc((void**)&dev_b, N * sizeof(int));
+//      cudaMalloc((void**)&dev_c, N * sizeof(int));
 
       // copy 2 arrays to device memory
-      cudaMemcpy(dev_a, a, N * sizeof(N), cudaMemcpyHostToDevice);
-      cudaMemcpy(dev_b, b, N * sizeof(N), cudaMemcpyHostToDevice);
+      cudaMemcpy(dev_a.get(), a, N * sizeof(N), cudaMemcpyHostToDevice);
+      cudaMemcpy(dev_b.get(), b, N * sizeof(N), cudaMemcpyHostToDevice);
 
       // <<< first element is the # of parallel blocks to launch
       // second >>> the # of threads per block
-      VecAdd<<<1, N>>>(dev_a, dev_b, dev_c);
+      VecAdd<<<1, N>>>(dev_a.get(), dev_b.get(), dev_c.get());
 
       // copy from device to host
-      cudaMemcpy(c, dev_c, N * sizeof(N), cudaMemcpyDeviceToHost);
+      cudaMemcpy(c, dev_c.get(), N * sizeof(N), cudaMemcpyDeviceToHost);
 
 //       for (int i = 0; i < N; i++) {
 //           std::cout << a[i] << " + " << b[i] << " = " << c[i] << "\n";
@@ -54,9 +57,9 @@ void doVectorAddition(int* a ,int* b,int* c,int N)
       duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
       std::cout<<"printf: "<< duration <<'\n';
 
-      cudaFree(dev_a);
-      cudaFree(dev_b);
-      cudaFree(dev_c);
+//      cudaFree(dev_a);
+//      cudaFree(dev_b);
+//      cudaFree(dev_c);
 }
 
 void doVectorAddition(float* a ,float* b,float* c,int N)
