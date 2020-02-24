@@ -3,35 +3,22 @@
 #include <iostream>
 #include <ctime>
 
-
-
-__global__ void VecAdd(int* A, int* B, int* C)
+template <typename T>
+__global__ void VecAdd(T* A, T* B, T* C)
 {
     int i = threadIdx.x;
     C[i] = A[i] + B[i];
 }
 
-__global__ void VecAdd(float* A, float* B, float* C)
-{
-    int i = threadIdx.x;
-    C[i] = A[i] + B[i];
-}
-
-__global__ void MatAdd(float** A, float **B,
-                       float** C)
+template <typename T>
+__global__ void MatAdd(T** A, T **B,
+                       T** C)
 {
     int i = threadIdx.x;
     int j = threadIdx.y;
     C[i][j] = A[i][j] + B[i][j];
 }
 
-__global__ void MatAdd(int** A, int **B,
-                       int** C)
-{
-    int i = threadIdx.x;
-    int j = threadIdx.y;
-    C[i][j] = A[i][j] + B[i][j];
-}
 
 void doVectorAddition(int* a ,int* b,int* c,int N)
 {

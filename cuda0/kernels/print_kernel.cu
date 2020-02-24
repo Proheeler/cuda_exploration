@@ -26,7 +26,7 @@
 // helper functions and utilities to work with CUDA
 #include <helper_functions.h>
 #include <helper_cuda.h>
-#include "../include/cuda_fd_funcs.h"
+//#include "../include/cuda_fd_funcs.cuh"
 
 #ifndef MAX
 #define MAX(a,b) (a > b ? a : b)
@@ -57,8 +57,8 @@ void doCudaKernel(int argc, char **argv)
 
     //Kernel configuration, where a two-dimensional grid and
     //three-dimensional blocks are configured.
-    dim3 dimGrid(3, 3);
-    dim3 dimBlock(3, 3, 3);
+    dim3 dimGrid(1, 1);
+    dim3 dimBlock(2, 2, 1);
     testKernel<<<dimGrid, dimBlock>>>(10);
     cudaDeviceSynchronize();
 

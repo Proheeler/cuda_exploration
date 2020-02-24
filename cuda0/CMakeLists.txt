@@ -12,9 +12,10 @@ set(
     ${CUDA_NVCC_FLAGS};
     -O3 -gencode arch=compute_52,code=sm_52
     )
-FILE(GLOB SOURCES "kernels/*.cu" "src/*.cpp" "src/*.c" "include/*.h")
+FILE(GLOB SOURCES "kernels/*.cu" "src/*.cpp" "src/*.c" "include/*.h"  "include/*.cuh")
 
 include_directories(
+    /opt/cuda/include
     /opt/cuda/samples/common/inc
     )
 
