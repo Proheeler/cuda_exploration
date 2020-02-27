@@ -12,7 +12,7 @@ auto RandomFloat(float a, float b) -> float {
 auto main(int argc, char **argv) -> int
 {
     doCudaKernel(argc,argv);
-    int N=100000;
+    int N=10;
     int a[N];
     int b[N];
     int c[N];
