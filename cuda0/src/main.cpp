@@ -27,8 +27,8 @@ auto main(int argc, char **argv) -> int
         a1[i] = -1;
         b1[i] = RandomFloat(static_cast<float>(i),static_cast<float>(i+1)) * RandomFloat(static_cast<float>(i),static_cast<float>(i+1));
     }
-//    doVectorAddition(a,b,c,N);
-//    doVectorAddition(a1,b1,c1,N);
+    doVectorAddition(a,b,c,N);
+    doVectorAddition(a1,b1,c1,N);
 //    int devID;
 //    cudaDeviceProp props;
 

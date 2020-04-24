@@ -12,10 +12,11 @@ __global__ void VecAdd(T* A, T* B, T* C)
 
 template <typename T>
 __global__ void MatAdd(T** A, T **B,
-                       T** C)
+                       T** C,int N)
 {
-    int i = threadIdx.x;
-    int j = threadIdx.y;
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    int j = blockIdx.y * blockDim.y + threadIdx.y;
+    if (i < N && j < N)
     C[i][j] = A[i][j] + B[i][j];
 }
 

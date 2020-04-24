@@ -5,6 +5,7 @@ project(cuda0)
 enable_language(CUDA)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_BUILD_TYPE Debug)
 find_package(CUDA QUIET REQUIRED)
 
 set(
